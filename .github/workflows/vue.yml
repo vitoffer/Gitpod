@@ -14,13 +14,12 @@ jobs:
 
     steps:
       - name: Setup Node.js for use with actions
-          uses: actions/setup-node@v2
-          with:
+        uses: actions/setup-node@v2
+        with:
             version:  22.x
 
       - uses: actions/checkout@v4
 
-      # Runs a single command using the runners shell
       - name: Build
         run:  |
             npm ci
