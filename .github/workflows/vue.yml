@@ -8,6 +8,11 @@ on:
 
   workflow_dispatch:
 
+permissions:
+  id-token: write
+  pages: write
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,6 +26,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build
+        id: build
         run: |
           npm i
           npm run build
