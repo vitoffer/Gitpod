@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node.js for use with actions
+          uses: actions/setup-node@v2
+          with:
+            version:  22.x
+
+      - uses: actions/checkout@v4
+
+      # Runs a single command using the runners shell
+      - name: Build
+        run:  |
+            npm ci
+            npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
